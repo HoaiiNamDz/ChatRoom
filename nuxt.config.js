@@ -38,18 +38,29 @@ export default {
   ],
   axios: {
     proxy: true,
+    baseURL: process.env.BASE_API_URL || 'https://chat-room-api.vercel.app',
+    proxyHeaders: false,
   },
   proxy: {
-    "/api": {
-      target: process.env.BASEURL || 'http://localhost:3000',
-      pathRewrite: { "^/api": "/api" },
-      changeOrigin: true
-    }
+    "/api/v1/auth": { 
+      target: 'https://chat-room-api.vercel.app', 
+      headers: { "Access-Control-Allow-Origin": "*", 'Access-Control-Allow-Headers': '*', },
+      secure: false, 
+      pathRewrite: {'^/api/v1/auth': ''} 
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    transpile: [({ isLegacy }) => isLegacy && 'axios']
+    // biên dịch axios cho phiên bản cũ
+  },
+
   env: {
-    BASEURL: 'https://chat-room-api.vercel.app'
-  }
+    baseUrl: process.env.BASE_URL || 'http://localhost:3000',
+    baseApiUrl: process.env.BASE_API_URL || 'https://chat-room-api.vercel.app'
+  },
+  // common: {
+  //   'Accept': 'application/json, text/plain, */*'
+  // },
 }

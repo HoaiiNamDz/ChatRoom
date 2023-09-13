@@ -107,7 +107,7 @@ export default {
             email: '',
             password: '',
             date: new Date().getDate(),
-            month:new Date().getMonth() +1,
+            month:new Date().getMonth() + 1,
             year: new Date().getFullYear(),
             gender: '',
         }
@@ -124,11 +124,10 @@ export default {
                 userName: this.userName,
                 email: this.email,
                 password: this.password,
-                birthday: this.date + '/' + this.month + '/' + this.year,
+                birthday: new Date(this.year,this.month-1,this.date),
                 gender: this.gender,
                 isLogin: false
             })
-            .catch((error) => {console.log(error);})
         }   
     },
 

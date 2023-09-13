@@ -13,21 +13,21 @@ const createStore = () => {
         actions: {
             authenticatorUser(vuexContext, payload) {
                 return new Promise((resolve, reject) => {
-                    let authUrlApi = `/v1/auth/login`;
+                    let PATH_API = `/api/v1/auth/login`;
                     
                     if(!payload.isLogin) {
-                        authUrlApi = `/v1/auth/register`;
+                        PATH_API = `/api/v1/auth/register`;
                     }
                     this.$axios
-                        .$post('/api' + authUrlApi, {
+                        .$post(process.env.baseApiUrl + PATH_API, {
                             fullname: payload.userName,
                             email: payload.email,
                             password: payload.password,
                             birthday: payload.birthday, 
                             gender: payload.gender,
-                        })
-                        .then((response) => {
-                            console.log(response);
+                        }, {timeout: 20000})
+                        .then((result) => {
+                            console.log(result);
                         })
                         .catch((error) => {console.log(error);})
                 })
