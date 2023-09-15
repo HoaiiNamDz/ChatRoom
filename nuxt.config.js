@@ -40,7 +40,7 @@ export default {
   ],
   axios: {
     proxy: true,
-    baseURL: process.env.BASE_API_URL || 'https://chat-room-api.vercel.app',
+    baseURL: process.env.BASE_API_URL || 'https://chat-room-api.vercel.app/api/v1',
     proxyHeaders: false,
   },
   proxy: {
@@ -60,7 +60,7 @@ export default {
 
   env: {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
-    baseApiUrl: process.env.BASE_API_URL || 'https://chat-room-api.vercel.app'
+    baseApiUrl: process.env.BASE_API_URL || 'https://chat-room-api.vercel.app/api/v1'
   },
   // common: {
   //   'Accept': 'application/json, text/plain, */*'

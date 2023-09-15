@@ -7,7 +7,10 @@
         <div class="bg-white p-10">
             <form class="space-y-6">
                 <div class="">
-                    <label for="verify" class="mb-2 block text-sm font-medium leading-6 text-gray-900">OTP Code</label>
+                    <div class="flex justify-between mb-2">
+                        <label for="verify" class="mb-2 block text-sm font-medium leading-6 text-gray-900">OTP Code</label>
+                        <a class="font-medium cursor-pointer text-indigo-600 hover:text-indigo-500">Resend OTP</a>
+                    </div>
                     <div class="flex items-center gap-4">
                         <input  
                             v-for="index in 6"

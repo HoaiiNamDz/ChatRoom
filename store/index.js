@@ -13,10 +13,10 @@ const createStore = () => {
         actions: {
             authenticatorUser(vuexContext, payload) {
                 return new Promise((resolve, reject) => {
-                    let PATH_API = `/api/v1/auth/login`;
+                    let PATH_API = `/auth/login`;
                     
                     if(!payload.isLogin) {
-                        PATH_API = `/api/v1/auth/register`;
+                        PATH_API = `/auth/register`;
                     }
                     this.$axios
                         .$post(process.env.baseApiUrl + PATH_API, {
