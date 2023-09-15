@@ -37,7 +37,7 @@ const createStore = () => {
             verifyRegister(vuexContext,payload) {
                 return new Promise((resolve, reject) => {
                     this.$axios
-                        .$post(process.env.baseApiUrl + '/api/v1/auth/verify', {
+                        .$post(process.env.baseApiUrl + '/auth/verify', {
                             fullname: payload.userName,
                             email: payload.email,
                             password: payload.password,

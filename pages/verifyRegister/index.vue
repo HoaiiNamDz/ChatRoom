@@ -24,6 +24,7 @@
                             class="block w-10 rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
                             @keyup="autoFocusNextInput"
                             @change="handleOnChange"
+                            value=''
                         >
                     </div>
                 </div>
@@ -37,7 +38,7 @@
         </div>
     </div>
 </template>
-<script>
+<script> 
 export default {
     layout: 'auth',
     data() {
@@ -55,12 +56,20 @@ export default {
                 }
                 e.target.nextSibling.focus()
             }
+            if(e.keyCode === 8 && e.target.dataset.index !== 1) {
+                if(inputElements[0].value.length === 0) {
+                    return false
+                }
+                e.target.previousSibling.focus()
+            }
         },
         verify() {
             this.$store.dispatch('verifyRegister', {
                 otp: this.otpJoined
             })
-            .catch((error) => this.$toast.error(error.response.data.message))
+            .catch((error) => {
+                this.$toast.error(error.response.data.message)
+            })
         },
         handleOnChange(e) {
             this.otp.push(e.target.value);
