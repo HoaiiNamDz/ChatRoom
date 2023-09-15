@@ -9,7 +9,7 @@
                 <div class="">
                     <label for="userName" class="mb-2 block text-sm font-medium leading-6 text-gray-900">Username</label>
                     <div class="flex items-center">
-                        <i class="pi pi-user rounded-md border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF] "></i>
+                        <i class="pi pi-user rounded-md rounded-tr-none rounded-br-none border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF] "></i>
                         <input 
                             id="userName" 
                             v-model="userName"
@@ -17,14 +17,14 @@
                             name="userName" 
                             required="" 
                             placeholder="Enter your username"
-                            class="block w-full rounded-md border-0 py-2 pr-28 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
+                            class="block w-full rounded-md rounded-bl-none rounded-tl-none border-0 py-2 pr-28 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
                         >
                     </div>
                 </div>
                 <div class="">
                     <label for="email" class="mb-2 block text-sm font-medium leading-6 text-gray-900">Email address</label>
                     <div class="flex items-center">
-                        <i class="pi pi-envelope rounded-md border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF] "></i>
+                        <i class="pi pi-envelope rounded-md rounded-tr-none rounded-br-none border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF] "></i>
                         <input 
                             id="email" 
                             v-model="email"
@@ -33,7 +33,7 @@
                             autocomplete="email" 
                             required="" 
                             placeholder="example@gmail.com"
-                            class="block w-full rounded-md border-0 py-2 pr-28 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
+                            class="block w-full rounded-md rounded-bl-none rounded-tl-none border-0 py-2 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
                         >
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
                     </div>
                     <div class="flex items-center">
-                        <i class="pi pi-lock rounded-md border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF]"></i>
+                        <i class="pi pi-lock rounded-md rounded-tr-none rounded-br-none border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF]"></i>
                         <input 
                             id="password" 
                             v-model="password"
@@ -51,7 +51,7 @@
                             autocomplete="current-password" 
                             required="" 
                             placeholder="Password"
-                            class="block w-full rounded-md border-0 py-2 pr-14 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
+                            class="block w-full rounded-md rounded-bl-none rounded-tl-none border-0 py-2 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
                         >
                     </div>
                 </div>
@@ -124,9 +124,19 @@ export default {
                 userName: this.userName,
                 email: this.email,
                 password: this.password,
+                // birthday: this.$dateFns.format(new Date(this.year,this.month-1,this.date), 'dd-MM-yyyy'),
                 birthday: new Date(this.year,this.month-1,this.date),
                 gender: this.gender,
                 isLogin: false
+            })
+            .then((result) => {
+                if(result.succes) {
+                    this.$toast.success(result.result.message)
+                    this.$router.push('/verifyRegister')
+                } 
+            })
+            .catch((error) => {
+                this.$toast.error(error.message)
             })
         }   
     },

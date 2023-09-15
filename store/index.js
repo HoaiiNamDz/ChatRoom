@@ -25,11 +25,31 @@ const createStore = () => {
                             password: payload.password,
                             birthday: payload.birthday, 
                             gender: payload.gender,
-                        }, {timeout: 20000})
-                        .then((result) => {
-                            console.log(result);
                         })
-                        .catch((error) => {console.log(error);})
+                        .then((result) => {
+                            localStorage.setItem('token', result.data.id);
+                            console.log(result);
+                            resolve({succes:true, result})
+                        })
+                        .catch((error) => reject(error))
+                })
+            },
+            verifyRegister(vuexContext,payload) {
+                return new Promise((resolve, reject) => {
+                    this.$axios
+                        .$post(process.env.baseApiUrl + '/api/v1/auth/verify', {
+                            fullname: payload.userName,
+                            email: payload.email,
+                            password: payload.password,
+                            birthday: payload.birthday, 
+                            gender: payload.gender,
+                            id: localStorage.getItem('token'),
+                            otp: payload.otp
+                    })
+                    .then((result) => {
+                        console.log(result);
+                    })
+                    .catch((error) => reject(error))
                 })
             }
         }

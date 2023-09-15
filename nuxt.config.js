@@ -35,6 +35,8 @@ export default {
   modules: [
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    '@nuxtjs/date-fns',
+    'vue-toastification/nuxt',
   ],
   axios: {
     proxy: true,
