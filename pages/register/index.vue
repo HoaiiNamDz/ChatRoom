@@ -7,16 +7,16 @@
         <div class="bg-white p-10">
             <form class="space-y-5" @submit.prevent="onSubmit" >
                 <div class="">
-                    <label for="userName" class="mb-2 block text-sm font-medium leading-6 text-gray-900">Username</label>
+                    <label for="fullname" class="mb-2 block text-sm font-medium leading-6 text-gray-900">Full name</label>
                     <div class="flex items-center">
                         <i class="pi pi-user rounded-md rounded-tr-none rounded-br-none border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF] "></i>
                         <input 
-                            id="userName" 
-                            v-model="userName"
+                            id="fullname" 
+                            v-model="fullname"
                             type="text" 
-                            name="userName" 
+                            name="fullname" 
                             required="" 
-                            placeholder="Enter your username"
+                            placeholder="Enter your full name"
                             class="block w-full rounded-md rounded-bl-none rounded-tl-none border-0 py-2 pr-28 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
                         >
                     </div>
@@ -103,7 +103,7 @@ export default {
     layout: 'auth',
     data() {
         return {
-            userName: '',
+            fullname: '',
             email: '',
             password: '',
             date: new Date().getDate(),
@@ -120,8 +120,8 @@ export default {
     },
     methods: {
         onSubmit() {
-            this.$store.dispatch('authenticatorUser', {
-                userName: this.userName,
+            this.$store.dispatch('register', {
+                fullname: this.fullname,
                 email: this.email,
                 password: this.password,
                 // birthday: this.$dateFns.format(new Date(this.year,this.month-1,this.date), 'dd-MM-yyyy'),
@@ -136,7 +136,7 @@ export default {
                 } 
             })
             .catch((error) => {
-                this.$toast.error(error.message)
+                this.$toast.error(error.response.data.message)
             })
         }   
     },

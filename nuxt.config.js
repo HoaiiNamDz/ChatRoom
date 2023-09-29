@@ -18,7 +18,10 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    '~/plugins/axios',
+    '~/plugins/vuex-persist'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -42,13 +45,14 @@ export default {
     proxy: true,
     baseURL: process.env.BASE_API_URL || 'https://chat-room-api.vercel.app/api/v1',
     proxyHeaders: false,
+    credentials:true,
   },
   proxy: {
-    "/api/v1/auth": { 
-      target: 'https://chat-room-api.vercel.app', 
-      headers: { "Access-Control-Allow-Origin": "*", 'Access-Control-Allow-Headers': '*', },
+    "/api/v1": { 
+      target: 'https://chat-room-api.vercel.app/', 
+      headers: { "Content-Type":"application/json","Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "*", "Access-Control-Allow-Credentials": "true" },
       secure: false, 
-      pathRewrite: {'^/api/v1/auth': ''} 
+      pathRewrite: {'^/api/v1': ''} 
     },
   },
 
@@ -62,7 +66,7 @@ export default {
     baseUrl: process.env.BASE_URL || 'http://localhost:3000',
     baseApiUrl: process.env.BASE_API_URL || 'https://chat-room-api.vercel.app/api/v1'
   },
-  // common: {
-  //   'Accept': 'application/json, text/plain, */*'
-  // },
+  common: {
+    'Accept': 'application/json, text/plain, */*'
+  },
 }

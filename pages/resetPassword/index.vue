@@ -9,7 +9,7 @@
                 <div class="">
                     <label for="email" class="mb-2 block text-sm font-medium leading-6 text-gray-900">Email address</label>
                     <div class="flex items-center">
-                        <i class="pi pi-envelope rounded-md border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF] "></i>
+                        <i class="pi pi-envelope rounded-md rounded-tr-none rounded-br-none border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF] "></i>
                         <input 
                             id="email" 
                             type="text" 
@@ -17,7 +17,7 @@
                             autocomplete="email" 
                             required="" 
                             placeholder="Enter your email address"
-                            class="block w-full rounded-md border-0 py-2 pr-28 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
+                            class="block w-72 rounded-md rounded-tl-none rounded-bl-none border-0 py-2 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
                         >
                     </div>
                 </div>
