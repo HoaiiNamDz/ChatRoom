@@ -1,9 +1,14 @@
 {
-  "src": "nuxt.config.js",
-  "use": "@nuxtjs/vercel-builder",
-  "config": {
-    "internalServer": true,
-    "generateStaticRoutes": true,
-    "serverFiles": ["rest/**", "img/**", "content/**"]
-  }
+  "version": 2,
+  "build": [
+    {
+      "src": "nuxt.config.js",
+      "use": "@nuxtjs/vercel-builder",
+      "config": {
+        "internalServer": true,
+        "generateStaticRoutes": true,
+        "serverFiles": ["rest/**", "img/**", "content/**"]
+      }
+    }
+  ]
 }
