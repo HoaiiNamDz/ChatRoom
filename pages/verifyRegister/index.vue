@@ -8,8 +8,8 @@
             <form class="space-y-6">
                 <div class="">
                     <div class="flex justify-between mb-2">
-                        <label for="verify" class="mb-2 block text-sm font-medium leading-6 text-gray-900">OTP Code</label>
-                        <a class="font-medium cursor-pointer text-indigo-600 hover:text-indigo-500">Resend OTP</a>
+                        <label for="verify" class="mb-2 block text-sm font-medium leading-6 text-gray-900">OTP Code ({{minutes}}:{{seconds}})</label>
+                        <a v-if="this.totalTime == 0" class="font-medium cursor-pointer text-indigo-600 hover:text-indigo-500" @click.prevent="reSendOTP">Resend OTP</a>
                     </div>
                     <div class="flex items-center gap-4">
                         <input  
@@ -24,7 +24,6 @@
                             class="block w-10 rounded-md border-0 py-2 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
                             @keyup="autoFocusNextInput"
                             @change="handleOnChange"
-                            value=''
                         >
                     </div>
                 </div>
@@ -39,13 +38,27 @@
     </div>
 </template>
 <script> 
+
 export default {
     layout: 'auth',
     data() {
         return {
             otp: [],
             otpJoined: '',
+            totalTime: 60,
+            timer: null,
         }
+    },
+    computed: {
+        minutes() {
+            return Math.floor(this.totalTime/60).toString().padStart(2, '0')
+        },
+        seconds() {
+            return (this.totalTime%60).toString().padStart(2, '0')
+        }
+    },
+    mounted() {
+        this.countdown(this.totalTime)
     },
     methods: {
         autoFocusNextInput(e) {
@@ -65,15 +78,45 @@ export default {
         },
         verify() {
             this.$store.dispatch('verifyRegister', {
-                otp: this.otpJoined
+                otp: this.otpJoined,
+                fullname: this.$store.getters.getData.fullname,
+                email: this.$store.getters.getData.email,
+                password: this.$store.getters.getData.password,
+                birthday: this.$store.getters.getData.birthday,
+                gender: this.$store.getters.getData.gender,
+                id: this.$store.getters.getData.id
+            })
+            .then(() => {
+                this.$toast.success('Register successfully')
+                this.$router.push('/login')
             })
             .catch((error) => {
+                this.otp = []
                 this.$toast.error(error.response.data.message)
             })
         },
         handleOnChange(e) {
             this.otp.push(e.target.value);
             this.otpJoined = this.otp.join('');
+        },
+        countdown() {
+            this.timer = setInterval(() => {
+                this.totalTime--;
+                if(this.totalTime === 0) {
+                    clearInterval(this.timer);
+                }
+            }, 1000);
+        },
+        reSendOTP() {
+            const inputElements = document.querySelectorAll('input')
+            this.totalTime = 60
+            this.countdown()
+            this.$store.dispatch('reSendOTP', {
+                email: this.$store.getters.getData.email,
+                id: this.$store.getters.getData.id
+            })
+            inputElements.forEach(inputElement => {inputElement.value = ''})
+            this.otp = []
         }
     },
 }

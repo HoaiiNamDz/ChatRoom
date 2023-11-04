@@ -5,19 +5,20 @@
             <p class="text-base text-gray-700">Sign in to continue to ChatRoom</p>
         </div>
         <div class="bg-white p-10">
-            <form action="" class="space-y-6">
+            <form action="" class="space-y-6" @submit.prevent="onSubmit">
                 <div class="">
                     <label for="email" class="mb-2 block text-sm font-medium leading-6 text-gray-900">Email address</label>
                     <div class="flex items-center">
                         <i class="pi pi-envelope rounded-md rounded-tr-none rounded-br-none border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF] "></i>
                         <input 
                             id="email" 
+                            v-model="email"
                             type="text" 
                             name="email" 
                             autocomplete="email" 
                             required="" 
                             placeholder="example@gmail.com"
-                            class="block w-full rounded-md rounded-bl-none rounded-tl-none border-0 py-2 pr-28 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
+                            class="block rounded-md rounded-bl-none rounded-tl-none border-0 py-2 w-72 pl-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 placeholder:text-sm focus:ring-2 focus:ring-inset focus:ring-indigo-500 bg-[#F7F7FF]"
                         >
                     </div>
                 </div>
@@ -30,6 +31,7 @@
                         <i class="pi pi-lock rounded-md rounded-tr-none rounded-br-none border-gray-300 border-[1px] border-r-0 shadow-sm p-[0.71rem] bg-[#F7F7FF]"></i>
                         <input 
                             id="password" 
+                            v-model="password"
                             type="password" 
                             name="password" 
                             autocomplete="current-password" 
@@ -52,7 +54,27 @@
 <script>
 import 'primeicons/primeicons.css';
 export default {
-    layout: 'auth'
+    layout: 'auth',
+    data() {
+        return {
+            email: '',
+            password: ''
+        }
+    },
+    methods: {
+        onSubmit() {
+            this.$store.dispatch('login', {
+                email: this.email,
+                password: this.password,
+                isLogin: true
+            })
+            .then((result) => {
+                if(result.succes) {
+                    this.$router.push('/chat')
+                } 
+            })
+        }
+    }
 }
 </script>
 <style>
