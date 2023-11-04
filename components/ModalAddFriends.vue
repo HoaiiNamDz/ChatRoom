@@ -13,7 +13,11 @@
 </template>
 <script>
 export default {
-    
+    data() {
+        return {
+            valueSearch: ""
+        }
+    }
 }
 </script>
 <style>

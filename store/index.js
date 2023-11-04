@@ -7,7 +7,8 @@ const createStore = () => {
             id: null,
             data: {},
             accessToken: null,
-            refreshToken: null
+            refreshToken: null,
+            isOpenInfoBar: false
         },
         mutations: {
             setToken(state, {accessToken, refreshToken = null}) {
@@ -20,6 +21,9 @@ const createStore = () => {
             clearToken(state) {
                 state.token = {}
                 state.data = {}
+            },
+            setIsOpenInfoBar(state) {
+                state.isOpenInfoBar = !state.isOpenInfoBar
             }
         },
         actions: {

@@ -15,7 +15,9 @@ export default {
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: [
+    'primeicons/primeicons.css',
+  ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -32,6 +34,7 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/fontawesome'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -41,6 +44,13 @@ export default {
     '@nuxtjs/date-fns',
     'vue-toastification/nuxt',
   ],
+  fontawesome: {
+    icons: {
+      solid: true, // Import các icon solid
+      brands: true, // Import các icon từ các nhãn hiệu (brands)
+      regular: true
+    }
+  },
   axios: {
     proxy: true,
     baseURL: process.env.BASE_API_URL || 'https://chat-room-api.vercel.app/api/v1',
